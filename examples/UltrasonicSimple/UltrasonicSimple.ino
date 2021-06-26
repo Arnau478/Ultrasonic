@@ -45,15 +45,22 @@
 Ultrasonic ultrasonic(12, 13);
 int distance;
 
+#define INCHES false
+
 void setup() {
   Serial.begin(9600);
 }
 
 void loop() {
   // Pass INC as a parameter to get the distance in inches
-  distance = ultrasonic.read();
+  if(INCHES){
+    distance = ultrasonic.read(INC);
+  }
+  else{
+    distance = ultrasonic.read();
+  }
   
-  Serial.print("Distance in CM: ");
+  Serial.print("Distance: ");
   Serial.println(distance);
   delay(1000);
 }
